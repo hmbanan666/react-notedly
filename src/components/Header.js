@@ -1,6 +1,18 @@
 import React from 'react';
+import { useQuery, gql, useApolloClient } from '@apollo/client';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { ButtonAsLink } from './ButtonAsLink';
+
 import logo from './../../public/logo192.png';
+
+// Локальный запрос
+const IS_LOGGED_IN = gql`
+  {
+    isLoggedIn @client
+  }
+`;
 
 const HeaderBar = styled.header`
   width: 100%;
@@ -20,11 +32,49 @@ const LogoText = styled.h1`
   display: inline;
 `;
 
-export const Header = () => {
+const UserState = styled.div`
+  margin-left: auto;
+`;
+
+const Header = (props) => {
+  // Хук запроса для проверки состояния авторизации пользователя
+  const { data } = useQuery(IS_LOGGED_IN);
+
+  const client = useApolloClient();
+
   return (
     <HeaderBar>
       <img src={logo} alt="Logo" height="40" />
       <LogoText>Notedly</LogoText>
+
+      <UserState>
+        {data.isLoggedIn ? (
+          <ButtonAsLink
+            onClick={() => {
+              // Удалим токен
+              localStorage.removeItem('token');
+              // Очистим кеш
+              client.resetStore();
+              // Обновляем локальное состояние
+              client.writeQuery({
+                query: IS_LOGGED_IN,
+                data: { isLoggedIn: false },
+              });
+              // Редирект
+              props.history.push('/');
+            }}
+          >
+            Logout
+          </ButtonAsLink>
+        ) : (
+          <p>
+            <Link to={'/signin'}>Sign In</Link> or{' '}
+            <Link to={'/signup'}>Sign Up</Link>
+          </p>
+        )}
+      </UserState>
     </HeaderBar>
   );
 };
+
+export default withRouter(Header);

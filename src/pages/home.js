@@ -33,30 +33,6 @@ export const Home = () => {
   // Если при получении данных произошел сбой, отобразим сообщение об ошибке
   if (error) return <p>Error!</p>;
 
-  /*
-
-  onClick={() =>
-            fetchMore({
-              variables: { cursor: data.noteFeed.cursor },
-              updateQuery: (previousResult, { fetchMoreResult }) => {
-                return {
-                  noteFeed: {
-                    cursor: fetchMoreResult.noteFeed.cursor,
-                    hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
-                    // Совмещаем новые результаты со старыми
-                    notes: [
-                      ...previousResult.noteFeed.notes,
-                      ...fetchMoreResult.noteFeed.notes,
-                    ],
-                    __typename: 'noteFeed',
-                  },
-                };
-              },
-            })
-          }
-
-   */
-
   // Если получение данных успешно, отобразим в UI
   return (
     <>

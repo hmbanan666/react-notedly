@@ -40,7 +40,7 @@ export const Note = ({ note }) => {
         </MetaInfo>
         <MetaInfo>
           <em>by</em> {note.author.username} <br />
-          {format(parseISO(note.createdAt), 'MM Do yyyy')}
+          {format(parseISO(note.createdAt), 'dd.MM.yyyy')}
         </MetaInfo>
         <UserActions>
           <em>Favorites:</em> {note.favoriteCount}
