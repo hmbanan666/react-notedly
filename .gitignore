@@ -69,5 +69,6 @@ dist
 .cache
 
 # cypress videos & screenshots
+cypress
 cypress/videos
 cypress/screenshots

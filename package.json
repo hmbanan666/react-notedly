@@ -22,7 +22,9 @@
   },
   "scripts": {
     "dev": "parcel src/index.html",
+    "predeploy": "parcel build src/index.html --public-url /react-notedly",
     "deploy:src": "parcel build src/index.html --public-url ./",
+    "deploy:gh": "gh-pages -d dist",
     "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
@@ -42,6 +44,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gh-pages": "^3.2.3",
     "graphql-request": "^3.5.0",
     "parcel-bundler": "^1.12.5",
     "prettier": "2.4.1",
