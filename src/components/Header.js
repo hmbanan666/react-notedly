@@ -1,18 +1,12 @@
 import React from 'react';
-import { useQuery, gql, useApolloClient } from '@apollo/client';
+import { useQuery, useApolloClient } from '@apollo/client';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ButtonAsLink } from './ButtonAsLink';
+import { IS_LOGGED_IN } from '../gql/query';
 
 import logo from './../../public/logo192.png';
-
-// Локальный запрос
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
 
 const HeaderBar = styled.header`
   width: 100%;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { Layout } from '../components/Layout';
 
@@ -13,12 +13,7 @@ import { NotePage } from './note';
 import { SignUp } from './signup';
 import { SignIn } from './signin';
 
-// Локальный запрос
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 export const Pages = () => {
   return (

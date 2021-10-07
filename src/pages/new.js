@@ -1,29 +1,10 @@
 import React, { useEffect } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { NoteForm } from '../components/NoteForm';
 
 import { GET_NOTES, GET_MY_NOTES } from '../gql/query';
-
-// Запрос
-const NEW_NOTE = gql`
-  mutation newNote($content: String!) {
-    newNote(content: $content) {
-      id
-      content
-      createdAt
-      favoriteCount
-      favoriteBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
-    }
-  }
-`;
+import { NEW_NOTE } from '../gql/mutation';
 
 export const NewNote = (props) => {
   useEffect(() => {

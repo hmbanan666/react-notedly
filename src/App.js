@@ -4,7 +4,6 @@ import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
-  gql,
   InMemoryCache,
 } from '@apollo/client';
 import { setContext } from 'apollo-link-context';
@@ -12,6 +11,7 @@ import { setContext } from 'apollo-link-context';
 import GlobalStyle from './components/GlobalStyle';
 
 import { Pages } from './pages';
+import { IS_LOGGED_IN } from './gql/query';
 
 // API URI + кеш
 const uri = process.env.API_URI;
@@ -44,12 +44,6 @@ const client = new ApolloClient({
   connectToDevTools: true,
 });
 
-// Локальный запрос
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
 //
 const data = { isLoggedIn: !!localStorage.getItem('token') };
 // Записываем данные кеша при начальной загрузке

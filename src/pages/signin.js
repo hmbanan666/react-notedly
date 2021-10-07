@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react';
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { useMutation, useApolloClient } from '@apollo/client';
 
 import { UserForm } from '../components/UserForm';
-
-const SIGNIN_USER = gql`
-  mutation signIn($email: String, $password: String!) {
-    signIn(email: $email, password: $password)
-  }
-`;
+import { SIGNIN_USER } from '../gql/mutation';
+import { IS_LOGGED_IN } from '../gql/query';
 
 export const SignIn = (props) => {
   useEffect(() => {
@@ -22,7 +18,7 @@ export const SignIn = (props) => {
       // Когда мутация завершена, сохраним JWT в Local
       localStorage.setItem('token', data.signIn);
       // Обновим локальный кеш
-      client.writeData({ data: { isLoggedIn: true } });
+      client.writeQuery({ query: IS_LOGGED_IN, data: { isLoggedIn: true } });
       // Редирект пользователя
       props.history.push('/');
     },
