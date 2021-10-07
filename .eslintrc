@@ -12,7 +12,7 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "prettier", "jsx-a11y", "eslint-plugin-cypress"],
+  "plugins": ["react", "react-hooks", "prettier", "jsx-a11y", "eslint-plugin-cypress"],
   "env": {
     "es6": true,
     "browser": true,
@@ -23,7 +23,8 @@
     "no-console": "off", // We use console.log for demonstrative purposes
     "no-unused-vars": "off", // At times, we have unused variables across chapters/sections
     "react-hooks/rules-of-hooks": "error", // Check rules of React Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks Hooks effect dependencies
+    "react-hooks/exhaustive-deps": "warn", // Checks Hooks effect dependencies
+    "react/prop-types": "off"
   },
   "settings": {
     "react": {
