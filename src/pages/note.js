@@ -1,24 +1,8 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { Note } from '../components/Note';
-
-// Запрос, принимающий переменную ID
-const GET_NOTE = gql`
-  query note($id: ID!) {
-    note(id: $id) {
-      id
-      createdAt
-      content
-      favoriteCount
-      author {
-        username
-        id
-        avatar
-      }
-    }
-  }
-`;
+import { GET_NOTE } from '../gql/query';
 
 export const NotePage = (props) => {
   // ID из url в переменную

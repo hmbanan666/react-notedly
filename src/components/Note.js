@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { format, parseISO } from 'date-fns';
+import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
+
+import { NoteUser } from './NoteUser';
+import { IS_LOGGED_IN } from '../gql/query';
 
 // Ограничим расширение заметок
 const StyledNote = styled.article`
@@ -28,6 +32,13 @@ const UserActions = styled.div`
 `;
 
 export const Note = ({ note }) => {
+  const { loading, error, data } = useQuery(IS_LOGGED_IN);
+
+  // Если данные загружаются
+  if (loading) return <p>Loading...</p>;
+  // Если при получении данных произошел сбой, отобразим сообщение об ошибке
+  if (error) return <p>Error!</p>;
+
   return (
     <StyledNote>
       <MetaData>
@@ -42,9 +53,16 @@ export const Note = ({ note }) => {
           <em>by</em> {note.author.username} <br />
           {format(parseISO(note.createdAt), 'dd.MM.yyyy')}
         </MetaInfo>
-        <UserActions>
-          <em>Favorites:</em> {note.favoriteCount}
-        </UserActions>
+
+        {data.isLoggedIn ? (
+          <UserActions>
+            <NoteUser note={note} />
+          </UserActions>
+        ) : (
+          <UserActions>
+            <em>Favorites:</em> {note.favoriteCount}
+          </UserActions>
+        )}
       </MetaData>
 
       <ReactMarkdown>{note.content}</ReactMarkdown>

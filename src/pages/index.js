@@ -5,6 +5,8 @@ import { useQuery, gql } from '@apollo/client';
 import { Layout } from '../components/Layout';
 
 import { Home } from './home';
+import { NewNote } from './new';
+import { EditNote } from './edit';
 import { MyNotes } from './mynotes';
 import { Favorites } from './favorites';
 import { NotePage } from './note';
@@ -18,11 +20,13 @@ const IS_LOGGED_IN = gql`
   }
 `;
 
-const Pages = () => {
+export const Pages = () => {
   return (
     <Router>
       <Layout>
         <Route exact path="/" component={Home} />
+        <PrivateRoute path="/new" component={NewNote} />
+        <PrivateRoute path="/edit/:id" component={EditNote} />
         <PrivateRoute path="/mynotes" component={MyNotes} />
         <PrivateRoute path="/favorites" component={Favorites} />
         <Route path="/note/:id" component={NotePage} />
@@ -60,5 +64,3 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
-
-export default Pages;

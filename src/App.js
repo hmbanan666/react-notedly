@@ -11,7 +11,7 @@ import { setContext } from 'apollo-link-context';
 
 import GlobalStyle from './components/GlobalStyle';
 
-import Pages from './pages';
+import { Pages } from './pages';
 
 // API URI + кеш
 const uri = process.env.API_URI;
